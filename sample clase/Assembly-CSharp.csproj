@@ -54,6 +54,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\PlayerMov.cs" />
+    <Compile Include="Assets\ScoreCounter.cs" />
+    <Compile Include="Assets\coinCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
