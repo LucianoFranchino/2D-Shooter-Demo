@@ -63,6 +63,7 @@
     <Compile Include="Assets\scripts\puerta2.cs" />
     <Compile Include="Assets\scripts\ScoreCounter.cs" />
     <Compile Include="Assets\scripts\Health.cs" />
+    <Compile Include="Assets\scripts\healthBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

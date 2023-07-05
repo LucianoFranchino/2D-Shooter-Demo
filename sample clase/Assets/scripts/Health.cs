@@ -5,22 +5,31 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth;
+    public float playerHealth;
+    public float currentHealth { get; private set; }
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = playerHealth;
     }
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0 , playerHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth > 0)
+        {
+            //Hurt animation
+        }
+        else
         {
             Destroy(gameObject);
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+            TakeDamage(1);
+    }
 }

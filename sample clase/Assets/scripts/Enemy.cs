@@ -55,12 +55,11 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(bxCollider.bounds.center + transform.right * attackRange * transform.localScale.x * colliderDistance, 
             new Vector3(bxCollider.bounds.size.x * attackRange, bxCollider.bounds.size.y, bxCollider.bounds.size.z),0,Vector2.left,0, playerMask);
-        return hit.collider != null;
 
-        if(hit.collider != null)
-        {
+        if (hit.collider != null)
             playerHealth = hit.transform.GetComponent<Health>();
-        }
+
+        return hit.collider != null;
     }
 
     private void OnDrawGizmos()
@@ -70,7 +69,7 @@ public class Enemy : MonoBehaviour
             new Vector3(bxCollider.bounds.size.x * attackRange, bxCollider.bounds.size.y, bxCollider.bounds.size.z));
     }
 
-    public void TakeDamage(int damage)
+    public void EnemyTakeDamage(int damage)
     {
         //Instantiate(explosion, transform.position, Quaternion.identity);
         health -= damage;
