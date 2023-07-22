@@ -53,17 +53,18 @@
     <UnityVersion>2020.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\Enemy.cs" />
-    <Compile Include="Assets\scripts\Shoot.cs" />
-    <Compile Include="Assets\scripts\Bullet.cs" />
-    <Compile Include="Assets\scripts\coinCounter.cs" />
-    <Compile Include="Assets\scripts\NextLevel.cs" />
-    <Compile Include="Assets\scripts\NextLevelPuerta.cs" />
-    <Compile Include="Assets\scripts\Player.cs" />
-    <Compile Include="Assets\scripts\puerta2.cs" />
-    <Compile Include="Assets\scripts\ScoreCounter.cs" />
-    <Compile Include="Assets\scripts\Health.cs" />
-    <Compile Include="Assets\scripts\healthBar.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Player\Shoot.cs" />
+    <Compile Include="Assets\Scripts\Player\Bullet.cs" />
+    <Compile Include="Assets\Scripts\coinCounter.cs" />
+    <Compile Include="Assets\Scripts\NextLevel.cs" />
+    <Compile Include="Assets\Scripts\NextLevelPuerta.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\puerta2.cs" />
+    <Compile Include="Assets\Scripts\healthBar.cs" />
+    <Compile Include="Assets\Scripts\ScoreCounter.cs" />
+    <Compile Include="Assets\Scripts\Player\Health.cs" />
+    <Compile Include="Assets\Scripts\Player\MachineGun.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
