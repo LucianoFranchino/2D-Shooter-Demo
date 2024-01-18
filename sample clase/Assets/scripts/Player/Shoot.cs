@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Shoot : MonoBehaviour
 {
-    public float offset;
-
-    public GameObject projectile;
     public Transform shotPoint;
+    public float bulletForce = 8f;
 
     protected float timeBtwShots;
     public float startTimeBtwShots;
@@ -15,23 +14,28 @@ public class Shoot : MonoBehaviour
 
     protected virtual void Update()
     {
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 
         if (timeBtwShots <= 0)
         {
             if (Input.GetMouseButton(0))
             {
-                anim.SetTrigger("Shoot");
-                Instantiate(projectile, shotPoint.position, transform.rotation);
-                timeBtwShots = startTimeBtwShots;
+                Shooting();
+                GameObject proyectile = BuletPool.Instance.RequesBulet();
+                proyectile.transform.position = shotPoint.position;
+                proyectile.transform.rotation = shotPoint.rotation;
             }
         }
         else
         {
             timeBtwShots -= Time.deltaTime;
         }
+    }
+
+
+    private void Shooting()
+    {
+        anim.SetTrigger("Shoot");
+        timeBtwShots = startTimeBtwShots;
     }
 
 }

@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
     }
 
+   
+
     private void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
@@ -29,14 +31,12 @@ public class Bullet : MonoBehaviour
             }
             DestroyProjectile();
         }
-
-
         transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
     void DestroyProjectile()
     {
         //Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
