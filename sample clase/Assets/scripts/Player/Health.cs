@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
     public float playerHealth;
     public float currentHealth { get; private set; }
+    [HideInInspector] public bool isInmune = false;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth > 0)
         {
+            StartCoroutine(Inmunity());
             //Hurt animation
         }
         else
@@ -28,9 +30,12 @@ public class Health : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //        TakeDamage(1);
-    //}
+    public IEnumerator Inmunity()
+    {
+        isInmune = true;
+        yield return new WaitForSeconds(0.3f);
+        isInmune=false;
+
+    }
+ 
 }
