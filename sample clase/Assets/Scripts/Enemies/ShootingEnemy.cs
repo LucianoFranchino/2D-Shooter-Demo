@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private float timeBetweenShoots;
-    [SerializeField] Transform pawnPoint;
+    [Header("Shoot")]
     [SerializeField] int disparosRafaga;
     [SerializeField] float pausa;
+    [SerializeField] private float timeBetweenShoots;
+    private Transform target;
+
+    [Header("Bulet")]
+    [SerializeField] Transform pawnPoint;
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private float speed;
 
     private void Start()
     {
         StartCoroutine(Rafagas());
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
+    private void Update()
+    {
+        LookAtPlayer();
+    }
+
+    void LookAtPlayer()
+    {
+        float direction = target.position.x - transform.position.x;
+
+        // Rota el sprite del enemigo
+        if (direction > 0)
+        {
+            transform.localScale = new Vector2(-2, 2); // Rota hacia la derecha
+        }
+        else if (direction < 0)
+        {
+            transform.localScale = new Vector2(2, 2); // Rota hacia la izquierda
+        }
     }
 
     IEnumerator Rafagas()
@@ -30,6 +56,9 @@ public class ShootingEnemy : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(prefab, pawnPoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(prefab, pawnPoint.position, pawnPoint.rotation);
+        Vector2 shootDirection = (pawnPoint.position - transform.position).normalized;
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.velocity = shootDirection * speed;
     }
 }

@@ -18,15 +18,12 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float stopDistance;
     private Transform target;
-    public int health;
     //public GameObject deathEffect;
     //public GameObject explosion;
+    
     [Header("Animation")]
     private Animator anim;
 
-    [Header("Die")]
-    public GameObject drop;
-    private float dropChance = 0.2f;
 
     public void Start()
     {
@@ -36,7 +33,23 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(Vector2.Distance(transform.position, target.position)> stopDistance)
+        ChacePlayer();
+        cooldownTimer += Time.deltaTime;
+
+        if (PlayerInSight())
+        {
+            if (cooldownTimer >= attackCooldown)
+            {
+                cooldownTimer = 0;
+                anim.SetTrigger("Attack");
+            }
+        }
+        
+    }
+
+    private void ChacePlayer()
+    {
+        if (Vector2.Distance(transform.position, target.position) > stopDistance)
         {
             anim.SetTrigger("Run");
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
@@ -54,18 +67,6 @@ public class Enemy : MonoBehaviour
                 transform.localScale = new Vector2(2, 2); // Rota hacia la izquierda
             }
         }
-
-        cooldownTimer += Time.deltaTime;
-
-        if (PlayerInSight())
-        {
-            if (cooldownTimer >= attackCooldown)
-            {
-                cooldownTimer = 0;
-                anim.SetTrigger("Attack");
-            }
-        }
-        
     }
 
     private bool PlayerInSight()
@@ -86,21 +87,6 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(bxCollider.bounds.center + transform.right * attackRange * transform.localScale.x * colliderDistance,
             new Vector3(bxCollider.bounds.size.x * attackRange, bxCollider.bounds.size.y, bxCollider.bounds.size.z));
-    }
-
-    public void EnemyTakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            if (Random.value <= dropChance)
-             {
-                Instantiate(drop, transform.position, Quaternion.identity);
-             }
-
-          Destroy(gameObject);
-        }
-        
     }
 
     public void DamagePlayer()

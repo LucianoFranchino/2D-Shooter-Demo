@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float suavizadoMov;
     private Vector3 vectorVelocidad = Vector3.zero;
     private bool mirando = true;
+    private Vector3 escala;
 
     [Header("Salto")]
     public int fuerzaDeSalto = 5;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         estaSaltando = false;
+        escala = transform.localScale;
     }
 
     private void Update()
@@ -54,16 +56,13 @@ public class Player : MonoBehaviour
 
         if(mover > 0 && !mirando)
         {
-            Girar();
+            mirando = !mirando;
+            transform.localScale = escala;
         }else if (mover < 0 && mirando)
         {
-            Girar();
+            mirando = !mirando;
+            transform.localScale = new Vector3(-escala.x, escala.y, escala.z);
         }
     }
 
-    void Girar()
-    {
-        mirando = !mirando;
-        transform.Rotate(0f, 180f, 0f);
-    }
 }

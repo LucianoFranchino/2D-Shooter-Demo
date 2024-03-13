@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\Player\MachineGun.cs" />
     <Compile Include="Assets\Scripts\Enemies\ShootingEnemy.cs" />
     <Compile Include="Assets\Scripts\puerta2.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemiesHealth.cs" />
     <Compile Include="Assets\Scripts\ScoreCounter.cs" />
     <Compile Include="Assets\Scripts\Player\Bullet.cs" />
     <Compile Include="Assets\Scripts\NextLevelPuerta.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\Enemies\EnemyBulet.cs" />
     <Compile Include="Assets\Scripts\BuletPool.cs" />
     <Compile Include="Assets\Scripts\Player\Shoot.cs" />
+    <Compile Include="Assets\Scripts\Player\GranadeShoot.cs" />
     <Compile Include="Assets\Scripts\coinCounter.cs" />
     <Compile Include="Assets\Scripts\NextLevel.cs" />
   </ItemGroup>

@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class Shoot : MonoBehaviour
 {
     public Transform shotPoint;
-    public float bulletForce = 8f;
 
     protected float timeBtwShots;
     public float startTimeBtwShots;

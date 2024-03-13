@@ -18,8 +18,6 @@ public class Bullet : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
     }
 
-   
-
     private void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
@@ -27,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             if (hitInfo.collider.CompareTag("Enemy"))
             {
-                hitInfo.collider.GetComponent<Enemy>().EnemyTakeDamage(damage);
+                hitInfo.collider.GetComponent<EnemiesHealth>().EnemyTakeDamage(damage);
             }
             DestroyProjectile();
         }
