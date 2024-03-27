@@ -20,8 +20,10 @@ public class GranadeShoot : MonoBehaviour
 
     void LanzarGranada()
     {
-        // Instanciar la granada en el punto de lanzamiento
-        GameObject granada = Instantiate(granadaPrefab, puntoLanzamiento.position, Quaternion.identity);
+        
+        GameObject granada = GranadePool.Instance.RequestGranade();
+        granada.transform.position = puntoLanzamiento.position;
+        granada.transform.rotation = puntoLanzamiento.rotation;
 
         // Obtener el componente Rigidbody2D de la granada
         Rigidbody2D rbGranada = granada.GetComponent<Rigidbody2D>();
