@@ -14,7 +14,7 @@ public class EnemyBulet : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        DirectionB();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,6 +26,11 @@ public class EnemyBulet : MonoBehaviour
             Destroy(gameObject);
         }
         Destroy(gameObject);
+    }
+
+    void DirectionB()
+    {
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
     void BuletLife()

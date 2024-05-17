@@ -10,6 +10,12 @@ public class ShootingEnemy : MonoBehaviour
     [SerializeField] float pausa;
     [SerializeField] private float timeBetweenShoots;
     private Transform target;
+    private bool isShooting = false;
+
+    [Header("Range")]
+    [SerializeField] float lineDistance;
+    public LayerMask playerCapa;
+    bool playerRange;
 
     [Header("Bulet")]
     [SerializeField] Transform pawnPoint;
@@ -17,32 +23,50 @@ public class ShootingEnemy : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Rafagas());
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     private void Update()
     {
+        Range();
         LookAtPlayer();
+    }
+
+    void Range()
+    {
+        playerRange = Physics2D.Raycast(pawnPoint.position, transform.right, lineDistance,playerCapa);
+        if (playerRange && !isShooting)
+        {
+            StartCoroutine(Rafagas());
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(pawnPoint.position, pawnPoint.position + transform.right * lineDistance);
     }
 
     void LookAtPlayer()
     {
         float direction = target.position.x - transform.position.x;
 
-        // Rota el sprite del enemigo
-        if (direction > 0)
+        if (direction < 0)
         {
-            transform.localScale = new Vector2(-2, 2); // Rota hacia la derecha
+            // Rota hacia la izquierda
+            transform.rotation = Quaternion.Euler(0, 0, 0); 
         }
-        else if (direction < 0)
+        else if (direction > 0)
         {
-            transform.localScale = new Vector2(2, 2); // Rota hacia la izquierda
+            // Rota hacia la derecha
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
     IEnumerator Rafagas()
     {
+        isShooting = true;
+
         while (true)
         {
             for (int i = 0; i < disparosRafaga; i++)
@@ -51,7 +75,14 @@ public class ShootingEnemy : MonoBehaviour
                 yield return new WaitForSeconds(timeBetweenShoots);
             }
             yield return new WaitForSeconds(pausa);
+
+            RaycastHit2D playerRange = Physics2D.Raycast(pawnPoint.position, transform.right, lineDistance, playerCapa);
+            if (!playerRange)
+            {
+                break;
+            }
         }
+        isShooting = false;
     }
 
     private void Shoot()
