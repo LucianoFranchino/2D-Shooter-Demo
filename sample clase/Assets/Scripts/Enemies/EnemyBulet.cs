@@ -6,10 +6,15 @@ using UnityEngine;
 public class EnemyBulet : MonoBehaviour
 {
     private Health playerHealth;
+    [SerializeField] private float speed;
 
     void Start()
     {
         Invoke("BuletLife", 3f);
+    }
+    private void Update()
+    {
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,6 @@ public class ShootingEnemy : MonoBehaviour
     [Header("Bulet")]
     [SerializeField] Transform pawnPoint;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private float speed;
 
     private void Start()
     {
@@ -57,8 +57,5 @@ public class ShootingEnemy : MonoBehaviour
     private void Shoot()
     {
         GameObject bullet = Instantiate(prefab, pawnPoint.position, pawnPoint.rotation);
-        Vector2 shootDirection = (pawnPoint.position - transform.position).normalized;
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = shootDirection * speed;
     }
 }

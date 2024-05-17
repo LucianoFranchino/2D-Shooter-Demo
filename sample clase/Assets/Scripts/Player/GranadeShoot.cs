@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class GranadeShoot : MonoBehaviour
 {
-    public GameObject granadaPrefab;
     public Transform puntoLanzamiento;
     public float fuerzaHorizontal = 5f;
     public float fuerzaVertical = 10f;
 
-    void Update()
+    protected virtual void Update()
     {
         // Lógica para lanzar la granada, por ejemplo, cuando se presiona una tecla
         if (Input.GetKeyDown(KeyCode.F))
