@@ -23,13 +23,16 @@ public class ShootingEnemy : MonoBehaviour
 
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();   
     }
 
     private void Update()
     {
-        Range();
-        LookAtPlayer();
+        if(target != null)
+        {
+            Range();
+            LookAtPlayer();
+        }
     }
 
     void Range()

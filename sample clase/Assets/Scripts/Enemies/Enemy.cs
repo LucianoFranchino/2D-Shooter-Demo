@@ -33,18 +33,20 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        ChacePlayer();
-        cooldownTimer += Time.deltaTime;
-
-        if (PlayerInSight())
+        if (target != null)
         {
-            if (cooldownTimer >= attackCooldown)
+            ChacePlayer();
+            cooldownTimer += Time.deltaTime;
+
+            if (PlayerInSight())
             {
-                cooldownTimer = 0;
-                anim.SetTrigger("Attack");
+                if (cooldownTimer >= attackCooldown)
+                {
+                    cooldownTimer = 0;
+                    anim.SetTrigger("Attack");
+                }
             }
         }
-        
     }
 
     private void ChacePlayer()

@@ -33,7 +33,8 @@ public class Health : MonoBehaviour
     public IEnumerator Inmunity()
     {
         isInmune = true;
-        yield return new WaitForSeconds(0.3f);
+        Debug.Log("Me pegaron wacho");
+        yield return new WaitForSeconds(1f);
         isInmune=false;
 
     }
